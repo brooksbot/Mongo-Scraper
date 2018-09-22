@@ -25,7 +25,7 @@ module.exports = {
         .sort({
             _id: -1
         })
-        exec(function(err, doc) {
+        .then(function(err, doc) {
             cb(doc);
         });
     },

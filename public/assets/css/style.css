@@ -5,7 +5,7 @@ html {
   
   body {
     margin-bottom: 80px;
-    background-image: url("../images/paper.png");
+    background-image: url("https://www.allongeorgia.com/wp-content/uploads/2018/08/newspaper.png");
   }
   
   .footer {
@@ -41,7 +41,20 @@ html {
   }
 
   .jumbotron .background-image {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Tsiselsky_%28newspaper-1944%29.png");
 
+  }
+
+  .jumbotron .caption {
+    position: relative;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .jumbotron .caption h1,
+  .jumbotron .caption p {
+    color: white;
   }
 
   .jumbotron p {
@@ -60,7 +73,7 @@ html {
 
   .panel.panel-default .panel-heading {
     background-color: #2196f3;
-    position: relative;
+    /* position: relative; */
   }
   
   .panel.panel-default .panel-heading h3 {
@@ -96,10 +109,10 @@ html {
     right: 0;
     bottom: 0;
     left: 0;
+    margin: 0;
     padding: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
-    margin: 0;
     font-weight: 800;
     background: #0c7cd5;
   }
@@ -128,8 +141,8 @@ html {
   }
   
   textarea {
-    padding: 10px;
     resize: none;
+    padding: 10px;
   }
   
   .bootbox-body .btn {
