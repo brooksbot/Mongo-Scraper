@@ -1,35 +1,47 @@
+// Global bootbox
 $(document).ready(function() {
-
+    // Getting a reference to the article container div we will render our articles to 
     var articleContainer = $(".article-container");
-  
+    // Adding event listeners for dynamically generated buttons for deleting articles,
+    // getting, saving, and deleting article notes
     $(document).on("click", ".btn.delete", handleArticleDelete);
     $(document).on("click", ".btn.notes", handleArticleNotes);
     $(document).on("click", ".btn.save", handleNoteSave);
     $(document).on("click", ".btn.note-delete", handleNoteDelete);
-  
+    // Getting the party started when loading the page!
     initPage();
   
     function initPage() {
+        // Empty the article container, run AJAX request for any saved articles
       articleContainer.empty();
       $.get("/api/headlines?saved=true").then(function(data) {
+          // If any headlines, render to the page
         if (data && data.length) {
           renderArticles(data);
         }
         else {
+            // Otherwise render a page that explains we have no articles
           renderEmpty();
         }
       });
     }
   
     function renderArticles(articles) {
+        // This handles appending HTML containing article data to the page
+        // Passing in a JSON array containing all available articles in our database
       var articlePanels = [];
+      // Pass each article JSON object to the createPanel function which returns a bootstrap panel
+      // with article data inside
       for (var i = 0; i < articles.length; i++) {
         articlePanels.push(createPanel(articles[i]));
       }
+      // Once we have HTML for stored articles(in our articlePanels array) append them to articlePanels container
       articleContainer.append(articlePanels);
     }
   
     function createPanel(article) {
+        // This function takes in a single JSON object for an article/headline
+        // It constructs a jQuery element containing all the formatted HTML for the article panel
       var panel = $(
         [
           "<div class='panel panel-default'>",
@@ -49,12 +61,17 @@ $(document).ready(function() {
           "</div>",
           "</div>"
         ].join("")
+        // Attach the articles id to the jQuery element
+        // Use this info to fugure out which article the user wantes to remove/open notes for
       );
       panel.data("_id", article._id);
+      // Return the constructed panel jQuery element
       return panel;
     }
   
     function renderEmpty() {
+        // This func. renders some HTML to the page explaining we don't have any articles to view
+        // Using a joined array of HTML string data because it's easier to read/change than a concatenated string!
       var emptyAlert = $(
         [
           "<div class='alert alert-warning text-center'>",
@@ -70,13 +87,18 @@ $(document).ready(function() {
           "</div>"
         ].join("")
       );
+      // appending data to the page
       articleContainer.append(emptyAlert);
     }
   
     function renderNotesList(data) {
+        // This function handles rendering note list items to our notes modal
+        // setting up an array of notes to render after finished
+        // And setting up a currentNote variable to temporarily store each note
       var notesToRender = [];
       var currentNote;
       if (!data.notes.length) {
+          // if we don't have any notes, display a message explaining this
         currentNote = ["<li class='list-group-item'>", "No notes for this article yet.", "</li>"].join("");
         notesToRender.push(currentNote);
       }
@@ -98,6 +120,7 @@ $(document).ready(function() {
     }
   
     function handleArticleDelete() {
+        // This function handles deleting article 
       var articleToDelete = $(this).parents(".panel").data();
       $.ajax({
         method: "DELETE",

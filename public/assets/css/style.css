@@ -13,7 +13,7 @@ html {
     bottom: 0;
     width: 100%;
     height: 80px;
-    color: white;
+    /* color: white; */
     background-color: #2196f3;
   }
   
@@ -41,12 +41,13 @@ html {
   }
 
   .jumbotron .background-image {
+    height: 100%;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Tsiselsky_%28newspaper-1944%29.png");
-
+    background-size: cover;
   }
 
   .jumbotron .caption {
-    position: relative;
+    position: absolute;
     top: 30%;
     width: 100%;
     text-align: center;
